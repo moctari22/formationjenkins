@@ -1,20 +1,12 @@
 pipeline {
-    agent any
-
+    agent any 
+    tools {
+        maven 'maven385' 
+    }
     stages {
-        stage('Build') {
+        stage('Get maven version') {
             steps {
-                echo 'Building..'
-            }
-        }
-        stage('Test') {
-            steps {
-                echo 'Testing..'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
+                sh 'mvn --version' 
             }
         }
     }

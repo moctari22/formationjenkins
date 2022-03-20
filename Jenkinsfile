@@ -1,10 +1,16 @@
-def mvn
-node {
-    stage('Get tools') {
-        def maven_home = tool 'maven385'
-        mvn = "${maven_home}/bin/mvn"
+pipeline {
+    agent any 
+    tools {
+        maven 'maven385' 
     }
-    stage('Get maven version') { 
-        bat "${mvn} --version"
-    }       
+    stages {
+        stage('Unit test') {
+            steps {
+                echo 'Le step de test'
+                bat 'mvn --version' 
+                bat 'mvn test'
+            }
+        }
+    }
 }
+

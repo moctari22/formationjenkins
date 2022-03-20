@@ -9,10 +9,18 @@ pipeline {
             steps {
                 echo 'Le step de Get version'
                 bat 'mvn --version' 
-                junit 'target/surefire-reports/*.xml'
+             
             }
+           post{
+        
+                always{
+                       junit 'target/surefire-reports/*.xml'
+                }
+        
+           }
 
         }
+      
       stage('Unit test') {
           steps {
                 echo 'Le step de test'
@@ -26,8 +34,15 @@ pipeline {
         steps {
             echo 'Le step de Packaging' 
             bat 'mvn package -DskipTest'
-            archiveArtifacts artifacts: 'target/*.jar'
+            
         }
+       post{
+
+            always{
+                   archiveArtifacts artifacts: 'target/*.jar'
+            }
+
+       }
 
     }
     }

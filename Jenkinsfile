@@ -1,50 +1,21 @@
 pipeline {
-    agent any 
-    tools {
-        maven 'maven385' 
-    }
+    agent any
+
     stages {
- 
-        stage('Get version') {
+        stage('Build') {
             steps {
-                echo 'Le step de Get version'
-                bat 'mvn --version' 
-             
+                echo 'Building..'
             }
-           post{
-        
-                always{
-                       junit 'target/surefire-reports/*.xml'
-                }
-        
-           }
-
         }
-      
-      stage('Unit test') {
-          steps {
-                echo 'Le step de test'
-                bat 'mvn test'
-
+        stage('Test') {
+            steps {
+                echo 'Testing..'
             }
-
         }
-      
-      stage('Packaging') {
-        steps {
-            echo 'Le step de Packaging' 
-            bat 'mvn package -DskipTest'
-            
-        }
-       post{
-
-            always{
-                   archiveArtifacts artifacts: 'target/*.jar'
+        stage('Deploy') {
+            steps {
+                echo 'Deploying....'
             }
-
-       }
-
-    }
+        }
     }
 }
-

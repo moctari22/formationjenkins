@@ -4,7 +4,7 @@ pipeline {
         maven 'maven385' 
     }
     stages {
-        stage(Parallel stage){
+        stage('Parallel stage'){
             parallel{
                 stage('Get version') {
                     steps {

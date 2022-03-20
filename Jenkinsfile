@@ -26,6 +26,7 @@ pipeline {
         steps {
             echo 'Le step de Packaging' 
             bat 'mvn package -DskipTest'
+            archiveArtifacts artifacts: 'target/*.jar'
         }
 
     }

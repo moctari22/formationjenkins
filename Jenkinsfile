@@ -9,7 +9,7 @@ pipeline {
             steps {
                 echo 'Le step de Get version'
                 bat 'mvn --version' 
-                junit 'reports/**/*.xml'
+                junit 'target/surefire-reports/*.xml'
             }
 
         }

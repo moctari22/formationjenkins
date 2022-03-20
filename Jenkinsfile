@@ -1,13 +1,10 @@
-pipeline {
-    agent any 
-    tools {
-        maven 'maven385' 
+def mvn
+node {
+    stage('Get tools') {
+        def maven_home = tool 'maven385'
+        mvn = "${maven_home}/bin/mvn"
     }
-    stages {
-        stage('Get maven version') {
-            steps {
-                bat 'mvn --version' 
-            }
-        }
-    }
+    stage('Get maven version') { 
+        bat "${mvn} --version"
+    }       
 }

@@ -1,20 +1,17 @@
 pipeline {
-    agent any
-
+    agent any 
+    tools {
+        maven 'maven385' 
+    }
     stages {
-        stage('Build') {
+        stage('Unit test') {
             steps {
-                echo 'Building..'
+                sh 'mvn test' 
             }
         }
-        stage('Test') {
+        stage('Package') {
             steps {
-                echo 'Testing..'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
+                sh 'mvn package -DskipTest' 
             }
         }
     }
